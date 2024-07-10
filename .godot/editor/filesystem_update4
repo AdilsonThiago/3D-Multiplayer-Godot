@@ -1,3 +1,7 @@
+res://menuPrincipal.gd
+res://menuPrincipal.tscn
+res://Networking.gd
 res://Char-Assets/Cena.tscn
-res://Char-Assets/Personagem.gd
 res://mundo.tscn
+res://mundo.gd
+res://Char-Assets/Personagem.gd

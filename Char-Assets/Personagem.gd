@@ -14,8 +14,13 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	pass
 
+func _enter_tree():
+	set_multiplayer_authority(name.to_int())
+	$SpringArm3D/Camera3D.current = is_multiplayer_authority()
+	pass
+
 func _input(event):
-	if event is InputEventMouseMotion:
+	if (event is InputEventMouseMotion) and is_multiplayer_authority():
 		rotate_y(-deg_to_rad(event.relative.x) * sensibilidade)
 		$SpringArm3D.rotate_x(deg_to_rad(event.relative.y) * sensibilidade)
 	if event.is_action_pressed("ui_cancel"):
@@ -33,7 +38,9 @@ func _physics_process(delta):
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir = -Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var input_dir = Vector3.ZERO
+	if is_multiplayer_authority():
+		input_dir = -Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		velocity.x = direction.x * SPEED

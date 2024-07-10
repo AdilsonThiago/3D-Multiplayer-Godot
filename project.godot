@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="3D-Multiplayer-Godot"
-run/main_scene="res://mundo.tscn"
+run/main_scene="res://menuPrincipal.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Networking="*res://Networking.gd"
 
 [input]
 
